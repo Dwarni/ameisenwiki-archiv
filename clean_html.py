@@ -24,5 +24,14 @@ def clean_html(path):
 if __name__ == "__main__":
     if len(sys.argv) < 2:
         print("Usage: python clean_html.py <datei.html>")
+        print("       python clean_html.py all")
         sys.exit(1)
-    clean_html(sys.argv[1])
+    
+    if sys.argv[1] == "all":
+        files = list(Path(".").rglob("*.html"))
+        print(f"Gefunden: {len(files)} HTML-Dateien")
+        for f in files:
+            clean_html(f)
+        print("Fertig!")
+    else:
+        clean_html(sys.argv[1])
